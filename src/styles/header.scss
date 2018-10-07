@@ -1,0 +1,64 @@
+header {
+  box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.1); 
+  margin-bottom: 20px;
+}
+
+.header-list {
+  list-style: none;
+  display: flex;
+  width: 1100px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.0);
+}
+
+
+li {
+  width: 150px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.0);
+}
+
+a {
+  transition: all .25s ease-in-out;
+  text-transform: uppercase;
+  font-weight: bolder;
+  padding: 15px;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #aa4b6b;
+  }
+}
+
+.router-link-exact-active {
+  box-shadow: 0px 2px 0px 0px #aa4b6b; 
+}
+
+.search-coin {
+  background-color: transparent;
+  border: none;
+  padding: 16px;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  color: #fff;
+  text-transform: uppercase;
+  display: block;
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #aa4b6b;
+    outline: none;
+  }
+  &::placeholder {
+    color: #ffffff;
+    text-align: center;
+  }
+}
