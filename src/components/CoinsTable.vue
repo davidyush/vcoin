@@ -14,12 +14,12 @@
         class='row'
         v-for="coin in allCoins"
         :key="coin.id"
-        @click="goTo(coin.symbol)"
+        @click="goTo(coin.id)"
         :class="[coin.changePercent24Hr > 0 ? 'change-up' : 'change-down']"
         >
         <td class='td-coin'>
           <span>{{ coin.rank }}.</span>
-          <img class='icon-coin' :src="`https://static.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`" alt="">
+          <img class='icon-coin' :src="`https://static.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`" alt="some img">
           <span>
             {{coin.id}}
           </span>

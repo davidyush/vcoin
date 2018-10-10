@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
-import Coin from './views/Coin.vue'
+import CoinPage from './views/CoinPage.vue'
 import SignIn from './views/SignIn.vue'
 
 Vue.use(Router)
@@ -23,7 +23,7 @@ export default new Router({
     {
       path: '/coins/:coin',
       name: 'Coin',
-      component: Coin
+      component: CoinPage
     },
     {
       path: '/signin',

@@ -29,7 +29,7 @@ export default {
 
     let inter = setInterval(() => {
       this.refreshInfo();
-      console.log('happen');
+      // console.log('happen');
     },10000);
     
   },
