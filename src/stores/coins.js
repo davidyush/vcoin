@@ -31,7 +31,7 @@ const coins = {
         if(coins[i].id === state.allCoins[i].id) {
           coins[i].priceUsd = state.allCoins[i].priceUsd;
         } else {
-          coins[i].priceUsd = state.allCoins.filter(coin => coin.id === coins[i].id)[0];
+          coins[i].priceUsd = state.allCoins.find(coin => coin.id === coins[i].id);
         }
       }
       state.allCoins = coins;

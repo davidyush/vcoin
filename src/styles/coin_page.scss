@@ -1,5 +1,9 @@
-@import 'constants';
+@import './constants.scss';
 
 h1 {
-  background-color: $greyShadow;
+  // box-shadow: $greyShadow;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: $bg;
 }

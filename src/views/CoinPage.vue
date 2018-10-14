@@ -21,7 +21,7 @@ export default {
       return this.$route.params.coin;
     },
     coinInfo() {
-      return this.allCoins.filter(coin => coin.id === this.$route.params.coin)[0];
+      return this.allCoins.find(coin => coin.id === this.$route.params.coin);
     }
   }
 }  

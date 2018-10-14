@@ -3,9 +3,26 @@
     <charter :chart-data="datacollection" :height='200'/>
     <!-- <div>{{coinHistory}}</div> -->
     <div class='buttons'>
-      <button @click="requestHistory({interval: 'h1', coin: coinId, limit: 24})">1 Day</button>
-      <button @click="requestHistory({interval: 'h1', coin: coinId, limit: 168})">1 Week</button>
-      <button @click="requestHistory({interval: 'm1', coin: coinId, limit: 20})">1 Month</button>
+      <button
+        @click="requestHistory({interval: 'h1', coin: coinId, flag: 'd'})">
+        1 Day
+      </button>
+      <button
+        @click="requestHistory({interval: 'h1', coin: coinId, flag: 'w'})">
+        1 Week
+      </button>
+      <button
+        @click="requestHistory({interval: 'd1', coin: coinId, flag: 'm'})">
+        1 Month
+      </button>
+      <button
+        @click="requestHistory({interval: 'd1', coin: coinId, flag: 'm3'})">
+        3 Months
+      </button>
+      <button
+        @click="requestHistory({interval: 'd1', coin: coinId, flag: 'y'})">
+        1 Year
+      </button>
     </div>
   </div>
 </template>
@@ -29,7 +46,7 @@ export default {
     this.requestHistory({
       interval: 'h1',
       coin: this.coinId,
-      limit: 24
+      flag: 'd'
     });
   },
   methods: {
