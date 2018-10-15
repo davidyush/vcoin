@@ -7,10 +7,10 @@
       <li>
         <router-link to='/profile'>Profile</router-link>
       </li>
-      <li>
+      <li v-if="!userState.name">
         <router-link to='/signin'>Sign In</router-link>
       </li>
-      <li>
+      <li v-if="!userState.name">
         <router-link to='/login'>Login</router-link>
       </li>
       <li>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'MainHeader',
@@ -35,6 +35,9 @@ export default {
     search: function(evt) {
       console.log(evt);
     }
+  },
+  computed: {
+    ...mapGetters(['userState'])
   }
 }
 </script>

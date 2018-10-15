@@ -6,7 +6,6 @@ const coin = {
   mutations: {
 
     SET_HISTORY(state, dataHistory) {
-      console.log('flag', dataHistory.flag);
       const historyData = dataHistory.map(item => item.priceUsd);
       let historyLabels;
       if(dataHistory.flag === 'd' || dataHistory.flag === 'w') {

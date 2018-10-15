@@ -8,7 +8,8 @@ const user = {
     token: '',
     money: 0,
     coins: [],
-    tradeHistory: []
+    tradeHistory: [],
+    errors: []
   },
 
   mutations: {
@@ -33,27 +34,35 @@ const user = {
       state.name = state.email = state.token = '';
       state.coins = state.tradeHistory = [];
       state.money = 0;
-      localStorage.pepeCry = '';
+      localStorage.pepele = '';
     },
     SET_IN_LOCAL_STORAGE(state) {
-      localStorage.pepeCry = state.token;
+      localStorage.pepele = state.token;
+    },
+    SET_ERROR(state, err) {
+      state.errors.push(err);
     }
   },
 
   actions: {
-    signIn({}, userData) {
-      return axios.post('/api/users', userData);
+    signIn({ commit }, userData) {
+      axios.post('/api/signin', userData).then(res => {
+        commit('SET_USER', res.data.user);
+        commit('SET_IN_LOCAL_STORAGE');
+      }).catch(err => {
+        commit('SET_ERROR', err.response.data.errors.message);
+      });
     },
     login({}, userData) {
       return axios.post('/api/auth', userData);
     },
     initUser({ commit }) {
-      if(localStorage.pepeCry) {
+      if(localStorage.pepele) {
         let userData = {
-          ...decode(localStorage.pepeCry),
-          token: localStorage.pepeCry
+          ...decode(localStorage.pepele),
+          token: localStorage.pepele
         };
-        axios.post('/api/auth/validate_token', userData).then(res => {
+        axios.post('/api/auth', userData).then(res => {
           commit('SET_USER', res.data.user);
         })
       } else {
@@ -72,6 +81,9 @@ const user = {
         coins: state.coins,
         tradeHistory: state.tradeHistory
       };
+    },
+    userErrors(state) {
+      return state.errors;
     }
   }
 

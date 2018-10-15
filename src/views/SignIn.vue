@@ -7,23 +7,37 @@
       <input autocomplete type="password" v-model="password" placeholder='Password'>
       <input class='btn-submit' type='submit' value='submit'/>
     </form>
-    <p v-for="err in errors" :key="err">{{err}}</p>
+    <p v-for="err in userErrors" :key="err">{{err}}</p>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'signin',
+  name: 'SignIn',
   data() {
     return {
       name: 'goodboy',
       email: 'asd@asd.com',
-      password: '123123',
-      errors: null
+      password: '123123'
     }
+  },
+  methods: {
+    ...mapActions(['signIn']),
+    submit: function() {
+      const user = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
+      this.signIn(user);
+    }
+
+  },
+  computed: {
+    ...mapGetters(['userState', 'userErrors'])
   }
 }
 </script>

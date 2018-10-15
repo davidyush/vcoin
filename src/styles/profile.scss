@@ -1,0 +1,14 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+}
+
+.left-side {
+  background-color: $bg;
+  color: #fff;
+  width: 200px;
+  padding: 20px;
+  border-radius: 3px;
+  text-align: center;
+}

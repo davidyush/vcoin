@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 v-if="coinInfo">#{{coinInfo.rank}} {{coinName}} ${{coinInfo.priceUsd}}</h1>
-    <p>{{coinInfo}}</p>
+    <h1 v-if="coinInfo">#{{coinInfo.rank}} {{coinName}} ${{ Number(coinInfo.priceUsd).toFixed(5)}}</h1>
     <charts :coinId='coinName'/>
+    <p>{{ coinInfo }}</p>
   </div>
 </template>
 

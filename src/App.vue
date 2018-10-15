@@ -17,7 +17,7 @@ export default {
     MainHeader
   },
   methods: {
-    ...mapActions(['fetchCoins', 'fetchingPrices', 'refreshInfo'])
+    ...mapActions(['fetchCoins', 'fetchingPrices', 'refreshInfo', 'initUser'])
   },
   created() {
 
@@ -27,14 +27,17 @@ export default {
       });
     }
 
+    if(!this.userState.name) {
+      this.initUser();
+    }
+
     let inter = setInterval(() => {
       this.refreshInfo();
-      // console.log('happen');
     },10000);
     
   },
   computed: {
-    ...mapGetters(['allCoins'])
+    ...mapGetters(['allCoins', 'userState'])
   }
 }
 </script>
