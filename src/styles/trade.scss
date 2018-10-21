@@ -1,0 +1,53 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.buy,
+.sell {
+  background-color: $bg;
+  padding: 20px;
+  width: 40%;
+  border-radius: 4px;
+  border: 1px solid $bg-hover;
+}
+
+.buy-title,
+.sell-title {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+input {
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid $bg-hover;
+  font-size: 16px;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+    background-color: $bg-hover;
+  }
+}
+
+input[type=submit] {
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+    background-color: $bg-hover;
+  }
+}
+
+input::placeholder {
+  color: #ffffff;
+}

@@ -1,25 +1,30 @@
 <template>
   <div>
-    <charter :chart-data="datacollection" :height='200'/>
+    <charter :chart-data="datacollection" :height='200' :options="oops"/>
     <!-- <div>{{coinHistory}}</div> -->
     <div class='buttons'>
       <button
+        class='btn'
         @click="requestHistory({interval: 'h1', coin: coinId, flag: 'd'})">
         1 Day
       </button>
       <button
+        class='btn'
         @click="requestHistory({interval: 'h1', coin: coinId, flag: 'w'})">
         1 Week
       </button>
       <button
+        class='btn'
         @click="requestHistory({interval: 'd1', coin: coinId, flag: 'm'})">
-        1 Month
+        30 Days
       </button>
       <button
+        class='btn'
         @click="requestHistory({interval: 'd1', coin: coinId, flag: 'm3'})">
-        3 Months
+        90 Days
       </button>
       <button
+        class='btn'
         @click="requestHistory({interval: 'd1', coin: coinId, flag: 'y'})">
         1 Year
       </button>
@@ -39,7 +44,29 @@ export default {
   },
   data() {
     return {
-      datacollection: null
+      datacollection: null,
+      oops: {
+        ticks: {
+                fontSize: 15,
+                beginAtZero: true,
+                stepSize: 1
+            },
+        legend: {
+          display: false
+        },
+        scales: {
+        xAxes: [{
+            gridLines: {
+                drawOnChartArea: false
+            }
+        }],
+        yAxes: [{
+            gridLines: {
+                drawOnChartArea: true
+            }
+        }]
+    }
+      }
     }
   },
   mounted() {
@@ -59,7 +86,7 @@ export default {
           label: this.coinId.toUpperCase(),
           pointBackgroundColor: 'rgba(0, 102, 255, 1)',
           borderWidth: 0,
-          pointBorderColor: 'white',
+          pointBorderColor: 'rgba(0, 102, 255, 1)',
           data: this.coinHistory.data,
           backgroundColor: [
               'rgba(0, 102, 255, 0.4)',
@@ -77,3 +104,5 @@ export default {
   }
 }  
 </script>
+
+<style lang="scss" scoped src='@/styles/charts.scss'/>

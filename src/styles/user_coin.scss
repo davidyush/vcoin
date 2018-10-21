@@ -1,0 +1,19 @@
+@import './constants.scss';
+
+.container {
+  width: 20%;
+  color: #fff;
+  border:1px solid $bg-hover;
+  border-radius: 4px;
+  text-align: center;
+  background-color: $bg;
+}
+
+h1 {
+  border-bottom: 1px solid $bg-hover;
+}
+
+p {
+  font-size: 16px;
+  margin: 5px;
+}

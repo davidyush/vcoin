@@ -59,7 +59,6 @@ const user = {
     initUser({ commit }) {
       if(localStorage.pepele) {
         let userData = {
-          ...decode(localStorage.pepele),
           token: localStorage.pepele
         };
         axios.post('/api/auth', userData).then(res => {

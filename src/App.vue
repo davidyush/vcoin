@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 import MainHeader from './components/MainHeader.vue';
 export default {
@@ -17,13 +17,16 @@ export default {
     MainHeader
   },
   methods: {
-    ...mapActions(['fetchCoins', 'fetchingPrices', 'refreshInfo', 'initUser'])
+    ...mapActions(['fetchCoins', 'fetchingPrices', 'refreshInfo', 'initUser']),
+    ...mapMutations(['START_SOCK', 'CLOSE_SOCK', 'MESSAGE_SOCK'])
   },
   created() {
 
     if(!this.allCoins.length) {
       this.fetchCoins().then(() => {
-        this.fetchingPrices();
+        // this.fetchingPrices();
+        this.START_SOCK();
+        this.MESSAGE_SOCK();
       });
     }
 

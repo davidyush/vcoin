@@ -1,5 +1,5 @@
 <template>
-  <button class='more-coins' @click="fetchOffsetCoins">More</button>
+  <button class='more-coins' @click="addCoins">More</button>
 </template>
 
 <script>
@@ -8,7 +8,12 @@ import { mapActions } from 'vuex';
 export default {
   name: 'ButtonMore',
   methods: {
-    ...mapActions(['fetchOffsetCoins'])
+    ...mapActions(['fetchOffsetCoins', 'restartSock']),
+    addCoins() {
+      this.fetchOffsetCoins().then(() => {
+        this.restartSock();
+      });
+    }
   }
 }  
 </script>

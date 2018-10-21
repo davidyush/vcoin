@@ -46,7 +46,6 @@ const coin = {
       } else if(flag === 'y') {
         start = end - (24 * 60 * 60 * 1000 * 365);
       }
-      console.log(`start ${start} end ${end}`)
       return fetch(`https://api.coincap.io/v2/assets/${coin}/history?interval=${interval}&start=${start}&end=${end}`)
         .then(res => res.json())
         .then(json => {
