@@ -97,6 +97,7 @@ export default {
       if(this.userState.money > this.buyUsdPrice) {
         const buyObj = {
           coinId: this.coin.id,
+          coinSymbol: this.coin.symbol,
           amount: this.buyCoinCount,
           token: localStorage.pepele,
           price: this.coin.priceUsd,
@@ -104,7 +105,7 @@ export default {
         console.log(buyObj);
         axios.post('/api/buycoins', buyObj).then(res => {
           console.log('res', res);
-          this.SET_USER(res.data);
+          this.SET_USER(res.data.user);
         });
       }
     },

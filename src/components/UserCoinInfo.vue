@@ -1,6 +1,6 @@
 <template>
   <div class='container'>
-    <h1>{{userState.name}}</h1>
+    <h2>{{userState.name}}</h2>
     <p>${{userState.money}}</p>
     <p>{{amount}} {{currentCoin}}</p>
   </div>
@@ -15,10 +15,10 @@ export default {
   computed: {
     ...mapGetters(['userState']),
     amount() {
-      console.log('watching for', this.currentCoin);
-      return this.userState.coins && this.userState.coins.find(coin => {
-        return coin.coinId === this.currentCoin;
-      }) || `You have not `;
+      const userCoin = this.userState.userCoins.find(coin => {
+        return coin.coinName === this.currentCoin;
+      });
+      return userCoin ? userCoin.amount : 0;
     }
   }
 }

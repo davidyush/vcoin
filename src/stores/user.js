@@ -1,5 +1,4 @@
 import axios from 'axios';
-import decode from 'jwt-decode';
 
 const user = {
   state: {
@@ -7,7 +6,7 @@ const user = {
     email: '',
     token: '',
     money: 0,
-    coins: [],
+    userCoins: [],
     tradeHistory: [],
     errors: []
   },
@@ -18,11 +17,11 @@ const user = {
       state.email = user.email;
       state.token = user.token;
       state.money = user.money;
-      state.coins = user.coins;
+      state.userCoins = Array.from(user.coins);
       state.tradeHistory = user.tradeHistory;
     },
-    SET_COINS(state, user) {
-      state.coins = user.coins;
+    SET_USER_COINS(state, coins) {
+      state.userCoins = Array.from(coins);
     },
     SET_TRADE_HISTORY(state, user) {
       state.tradeHistory = user.tradeHistory;
@@ -32,7 +31,7 @@ const user = {
     },
     LOG_OUT(state) {
       state.name = state.email = state.token = '';
-      state.coins = state.tradeHistory = [];
+      state.userCoins = state.tradeHistory = [];
       state.money = 0;
       localStorage.pepele = '';
     },
@@ -77,7 +76,7 @@ const user = {
         email: state.email,
         token: state.token,
         money: state.money,
-        coins: state.coins,
+        userCoins: state.userCoins,
         tradeHistory: state.tradeHistory
       };
     },

@@ -2,13 +2,65 @@
 
 .container {
   display: flex;
+  justify-content: space-between;
 }
 
 .left-side {
+  width: 250px;
+}
+
+.right-side {
+  width: 700px;
+}
+
+.user-name {
+  border-bottom: 1px solid $bg-hover;
+  padding-bottom: 5px;
+}
+
+.user-money {
+  padding-top: 10px;
+}
+
+.user-side {
   background-color: $bg;
   color: #fff;
-  width: 200px;
-  padding: 20px;
   border-radius: 3px;
   text-align: center;
+  padding: 10px 20px;
+  border: 1px solid $bg-hover;
+}
+
+.coins {
+  background-color: $bg;
+  color: #fff;
+  border-radius: 3px;
+  border: 1px solid $bg-hover;
+  margin-top: 20px;
+}
+
+.left-info {
+  display: flex;
+  align-items: center;
+}
+
+.single-coin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-bottom: 1px solid $bg-hover;
+  &:last-child {
+    border: none;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: $bg-hover;
+  }
+}
+
+.icon-coin {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
 }

@@ -1,0 +1,16 @@
+@import './constants.scss';
+
+.info {
+  background-color: $bg;
+  border-radius: 4px;
+  border: 1px solid $bg-hover;
+  margin-bottom: 20px;
+  padding: 10px;
+  h3,p,h4 {
+    color: #fff;
+  }
+  h2 {
+    border-bottom: 1px solid $bg-hover;
+    margin-bottom: 5px;
+  }
+}

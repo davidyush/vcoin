@@ -58,9 +58,9 @@ const coins = {
     START_SOCK(state) {
       const coinsList = state.listCoins.join(',');
       state.sock = new WebSocket(`wss://ws.coincap.io/prices?assets=${coinsList}`);
-      state.sock.onopen = () => console.log('webSocketRider here');
-      state.sock.onerror = () => console.log('webSocketRider error');
-      state.sock.onclose = () => console.log('webSocketRider is dead');
+      // state.sock.onopen = () => console.log('webSocketRider here');
+      // state.sock.onerror = () => console.log('webSocketRider error');
+      // state.sock.onclose = () => console.log('webSocketRider is dead');
     },
 
     CLOSE_SOCK(state) {
