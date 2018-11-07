@@ -17,7 +17,7 @@
 
 .buy-title,
 .sell-title {
-  color: #fff;
+  color: $fontColor;
   text-align: center;
   text-transform: uppercase;
 }
@@ -28,7 +28,7 @@ input {
   margin-bottom: 10px;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: $fontColor;
   border: 1px solid $bg-hover;
   font-size: 16px;
   border-radius: 4px;
@@ -49,5 +49,5 @@ input[type=submit] {
 }
 
 input::placeholder {
-  color: #ffffff;
+  color: $fontColor;
 }

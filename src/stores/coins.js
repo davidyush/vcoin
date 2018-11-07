@@ -6,31 +6,36 @@ const coins = {
     offset: 20,
     sock: null
   },
-  
+  //unstable mutations and actions
   mutations: {
 
     SET_COINS(state, coins) {
       state.allCoins = coins;
     },
 
-    SET_NEW_PRICE(state, prices) {
-      for(let i = 0; i < state.allCoins.length; i++) {
-        for(let price in prices) {
-          if(state.allCoins[i].id === price) {
-            state.allCoins[i].priceUsd = prices[price];
-          }
-        }
-      }
-    },
-
     SET_LIST_COINS(state, coins) {
       state.listCoins = coins.map(coin => coin.id);
     },
 
+    ADD_LIST_COINS(state, coins) {
+      state.listCoins = [...new Set(state.listCoins.concat(coins))];
+    },
+
     ADD_COINS(state, coins) {
-      state.allCoins.push(...coins);
+      coins.forEach(newCoin => {
+        if(!state.allCoins.some(coin => coin.id === newCoin.id)) {
+          state.allCoins.push(newCoin);
+        }
+      });
+
+
       state.listCoins.push(...coins.map(coin => coin.id));
       state.offset += state.step;
+    },
+
+    ADD_COIN(state, coin) {
+      state.allCoins.push(coin); //uniq?
+      state.listCoins.push(coin.id);
     },
 
     REFRESH_INFO(state, coins) {
@@ -44,11 +49,22 @@ const coins = {
       state.allCoins = coins;
     },
 
+    PURE_REFRESH(state, coins) {
+      for(let i = 0; i < state.allCoins.length; i++) {
+        const newInfo = coins.find(coin => coin.id === state.allCoins[i].id) || null;
+        if(newInfo) {
+          state.allCoins[i].changePercent24Hr = newInfo.changePercent24Hr;
+          state.allCoins[i].marketCapUsd = newInfo.marketCapUsd;
+          state.allCoins[i].volumeUsd24Hr = newInfo.volumeUsd24Hr;
+        }
+      }
+    },
+
     SEARCH_COINS(state, word) {
       if(word !== '') {
         const val = word.toUpperCase();
         state.currentCoins = state.allCoins.filter(coin => {
-          return coin.long.startsWith(val) || coin.short.startsWith(val);
+          return coin.id.startsWith(val) || coin.symbol.startsWith(val);
         });
       } else {
         state.currentCoins = state.allCoins.slice(0, state.offset);
@@ -57,10 +73,8 @@ const coins = {
 
     START_SOCK(state) {
       const coinsList = state.listCoins.join(',');
+      console.log( 'coinsList', coinsList, state.listCoins.length);
       state.sock = new WebSocket(`wss://ws.coincap.io/prices?assets=${coinsList}`);
-      // state.sock.onopen = () => console.log('webSocketRider here');
-      // state.sock.onerror = () => console.log('webSocketRider error');
-      // state.sock.onclose = () => console.log('webSocketRider is dead');
     },
 
     CLOSE_SOCK(state) {
@@ -95,6 +109,15 @@ const coins = {
       });
     },
 
+    fetchCoin(context, coinId) {
+      return fetch(`https://api.coincap.io/v2/assets/${coinId}`)
+        .then(res => res.json())
+        .then(json => {
+          const data = json.data;
+          context.commit('ADD_COIN', data);
+      });
+    },
+
     fetchOffsetCoins(context) {
       const { step, offset } = context.state;
       return fetch(`https://api.coincap.io/v2/assets?limit=${step}&offset=${offset}`)
@@ -111,24 +134,8 @@ const coins = {
         .then(res => res.json())
         .then(json => {
           const data = json.data;
-          context.commit('REFRESH_INFO', data);
+          context.commit('PURE_REFRESH', data);
       });
-    },
-
-    fetchingPrices(context) {
-      const coinsList = context.state.listCoins.join(',');
-
-      const socket = new WebSocket(`wss://ws.coincap.io/prices?assets=${coinsList}`);
-      socket.onopen = () => { console.info('web socket rider'); }
-
-      socket.onmessage = (evt) => {
-        const msg = JSON.parse(evt.data);
-        context.commit('SET_NEW_PRICE', msg);
-      }
-
-      socket.onerror = (err) => { console.error('errore', err); }
-
-      socket.onclose = () => { console.log('web socket rider is dead now', new Date()); }
     },
 
     restartSock(context) {

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class='coin-container'>
-      <!-- <h2 v-if="coinInfo">#{{coinInfo.rank}} {{coinInfo.symbol}} ${{ Number(coinInfo.priceUsd).toFixed(5)}}</h2> -->
       <div class='info-block'>
         <single-coin-info v-if="coinInfo" :info="coinInfo"/>
         <user-coin-info v-if="coinInfo" :currentCoin="coinInfo.symbol"/>

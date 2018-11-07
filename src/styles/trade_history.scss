@@ -1,15 +1,12 @@
 @import './constants.scss';
 
-.coins-table {
-  width: 1100px;
-  margin: 0 auto;
-  margin-top: 20px;
+.trade-history {
+  width: 100%;
   margin-bottom: 20px;
   table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid  rgba(255, 255, 255, 0.2);
   border-radius: 4px;
-  // text-transform: capitalize
   text-transform: uppercase;
 }
 
@@ -31,26 +28,4 @@ td, th {
 td {
   border-bottom: 1px solid  rgba(255, 255, 255, 0.2);
   font-size: 14px;
-}
-
-.td-coin {
-  text-align: left;
-}
-
-.icon-coin {
-  width: 25px;
-  transform: translateY(5px);
-}
-
-.row:hover {
-  cursor: pointer;
-  opacity: 0.9;
-  box-shadow: 0px 0px 0px 1px #eee, 0px 0px 0px 1px #eee;
-}
-
-.change-down {
-  background-color: $red;
-}
-.change-up {
-  background-color: $green;
 }

@@ -1,7 +1,7 @@
 @import './constants.scss';
 
 .container {
-  color: #fff;
+  color: $fontColor;
   border:1px solid $bg-hover;
   border-radius: 4px;
   text-align: center;

@@ -17,21 +17,33 @@ export default {
     MainHeader
   },
   methods: {
-    ...mapActions(['fetchCoins', 'fetchingPrices', 'refreshInfo', 'initUser']),
-    ...mapMutations(['START_SOCK', 'CLOSE_SOCK', 'MESSAGE_SOCK'])
+    ...mapActions(['fetchCoins', 'fetchCoin', 'refreshInfo', 'initUser', 'restartSock']),
+    ...mapMutations(['START_SOCK', 'CLOSE_SOCK', 'MESSAGE_SOCK', 'ADD_LIST_COINS']),
+    getUniqUserCoins() {
+      const userCoins = this.userState.userCoins;
+      for(let i = 0; i < userCoins.length; i++) {
+        if(!this.allCoins.some(coin => coin.id === userCoins[i].coinId)) {
+          this.fetchCoin(userCoins[i].coinId);
+        }
+      }
+    }
   },
   created() {
 
-    if(!this.allCoins.length) {
+    if(!this.userState.name) {
+      this.initUser().then(() => {
+        this.fetchCoins().then(() => {
+          this.ADD_LIST_COINS(this.userListCoins);
+          this.getUniqUserCoins();
+          this.START_SOCK();
+          this.MESSAGE_SOCK();
+        });
+      });
+    } else {
       this.fetchCoins().then(() => {
-        // this.fetchingPrices();
         this.START_SOCK();
         this.MESSAGE_SOCK();
       });
-    }
-
-    if(!this.userState.name) {
-      this.initUser();
     }
 
     let inter = setInterval(() => {
@@ -40,7 +52,7 @@ export default {
     
   },
   computed: {
-    ...mapGetters(['allCoins', 'userState'])
+    ...mapGetters(['allCoins', 'userState', 'userListCoins'])
   }
 }
 </script>

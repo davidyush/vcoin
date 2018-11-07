@@ -11,6 +11,7 @@
 
 .right-side {
   width: 700px;
+  // border: 1px solid red;
 }
 
 .user-name {
@@ -24,7 +25,7 @@
 
 .user-side {
   background-color: $bg;
-  color: #fff;
+  color: $fontColor;
   border-radius: 3px;
   text-align: center;
   padding: 10px 20px;
@@ -33,10 +34,11 @@
 
 .coins {
   background-color: $bg;
-  color: #fff;
+  color: $fontColor;
   border-radius: 3px;
   border: 1px solid $bg-hover;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .left-info {
@@ -63,4 +65,16 @@
   width: 25px;
   height: 25px;
   margin-right: 10px;
+}
+
+.total {
+  background-color: $bg;
+  color: $fontColor;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid $bg-hover;
+  h2 {
+    border-bottom: 1px solid $bg-hover;
+  }
 }

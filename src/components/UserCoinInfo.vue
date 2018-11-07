@@ -1,7 +1,7 @@
 <template>
-  <div class='container'>
+  <div class='container' v-if="userState.name">
     <h2>{{userState.name}}</h2>
-    <p>${{userState.money}}</p>
+    <p>${{userState.money.toFixed(4)}}</p>
     <p>{{amount}} {{currentCoin}}</p>
   </div>
 </template>

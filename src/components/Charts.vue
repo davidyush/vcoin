@@ -80,19 +80,23 @@ export default {
     ...mapActions(['getHistory']),
     requestHistory(options) {
       this.getHistory(options).then(() => {
+        const { labels, data } = this.coinHistory;
+        const color = data[0] > data[data.length - 1]
+          ? { main: "rgba(255, 0, 127, 1)", opacity: "rgba(255, 0, 127, 0.4)" }
+          : { main: "rgba(57, 255, 20, 1)", opacity: "rgba(57, 255, 20, 0.4)" };
         this.datacollection = {
-        labels: this.coinHistory.labels,
+        labels: labels,
         datasets:[{
           label: this.coinId.toUpperCase(),
-          pointBackgroundColor: 'rgba(0, 102, 255, 1)',
+          pointBackgroundColor: color.main,
           borderWidth: 0,
-          pointBorderColor: 'rgba(0, 102, 255, 1)',
-          data: this.coinHistory.data,
+          pointBorderColor: color.main,
+          data: data,
           backgroundColor: [
-              'rgba(0, 102, 255, 0.4)',
+              color.opacity,
             ],
             borderColor: [
-              'rgba(0, 102, 255, 1)',
+              color.main,
             ],
           }]
         }

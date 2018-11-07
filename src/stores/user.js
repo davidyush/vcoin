@@ -60,7 +60,7 @@ const user = {
         let userData = {
           token: localStorage.pepele
         };
-        axios.post('/api/auth', userData).then(res => {
+        return axios.post('/api/auth', userData).then(res => {
           commit('SET_USER', res.data.user);
         })
       } else {
@@ -82,6 +82,9 @@ const user = {
     },
     userErrors(state) {
       return state.errors;
+    },
+    userListCoins(state) {
+      return state.userCoins.map(coin => coin.coinId);
     }
   }
 

@@ -1,3 +1,5 @@
+@import './constants.scss';
+
 header {
   box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.1); 
   margin-bottom: 20px;
@@ -27,7 +29,7 @@ a {
   display: block;
   width: 100%;
   text-align: center;
-  color: #fff;
+  color: $fontColor;
   text-decoration: none;
   font-size: 14px;
   &:hover {
@@ -48,7 +50,7 @@ a {
   width: 100%;
   text-align: center;
   font-weight: bolder;
-  color: #fff;
+  color: $fontColor;
   text-transform: uppercase;
   display: block;
   &:hover,
@@ -58,7 +60,7 @@ a {
     outline: none;
   }
   &::placeholder {
-    color: #ffffff;
+    color: $fontColor;
     text-align: center;
   }
 }

@@ -4,7 +4,7 @@
       <li>
         <router-link to='/'>Pepele</router-link>
       </li>
-      <li>
+      <li v-if="userState.name">
         <router-link to='/profile'>Profile</router-link>
       </li>
       <li v-if="!userState.name">
@@ -13,14 +13,14 @@
       <li v-if="!userState.name">
         <router-link to='/login'>Login</router-link>
       </li>
-      <li>
+      <!-- <li>
         <input
           type="text"
           @input='search'
           class='search-coin'
           placeholder="search"
         />
-      </li>
+      </li> -->
     </ul>
   </header>
 </template>

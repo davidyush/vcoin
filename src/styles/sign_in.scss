@@ -1,3 +1,5 @@
+@import './constants.scss';
+
 .form-container {
   margin-top: 50px;
   padding: 50px;
@@ -9,7 +11,7 @@
   border: 1px solid  rgba(255, 255, 255, 0.2)
 }
 h1 {
-  color: #ffffff;
+  color: $fontColor;
   margin-bottom: 20px;
   margin-top: 50px;
   text-align: center;
@@ -30,13 +32,13 @@ input {
   text-transform: uppercase;
   background-color: transparent;
   border: 1px solid  rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: $fontColor;
   transition: all .25s ease-in-out;
   border-radius:4px;
 }
 
 input::placeholder {
-  color: #ffffff;
+  color: $fontColor;
 }
 
 input:focus,
@@ -49,5 +51,5 @@ button:focus {
 }
 
 p {
-  color: #fff;
+  color: $fontColor;
 }

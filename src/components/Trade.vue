@@ -1,7 +1,7 @@
 <template>
-  <div class='container'>
+  <div class='container' v-if="userState.name">
     <div class='buy'>
-      <h2 class='buy-title'>Buy</h2>
+      <h2 class='buy-title'>Buy {{coin.symbol}}</h2>
       <form class='buy-form' @submit.prevent="buyCoins">
         <input
           type="number"
@@ -23,11 +23,12 @@
       </form>
     </div>
     <div class='sell'>
-      <h2 class='sell-title'>Sell</h2>
-      <form class='sell-form'>
+      <h2 class='sell-title'>Sell {{coin.symbol}}</h2>
+      <form class='sell-form' @submit.prevent="sellCoins">
         <input
           type="number"
           class='sell-count'
+          step='any'
           :placeholder="coin.symbol"
           v-model='sellCoinCount'
           @input="sellCoinChange"
@@ -68,7 +69,6 @@ export default {
         this.buyCoinCount = 0;
         return;
       }
-      console.log(typeof this.coin.priceUsd);
       this.buyUsdPrice = +this.coin.priceUsd * +event.target.value;
     },
     buyUsdPriceChange(event) {
@@ -101,23 +101,37 @@ export default {
           amount: this.buyCoinCount,
           token: localStorage.pepele,
           price: this.coin.priceUsd,
-        }
+        };
         console.log(buyObj);
         axios.post('/api/buycoins', buyObj).then(res => {
           console.log('res', res);
           this.SET_USER(res.data.user);
+          this.$toast.success({
+            title:'Success, Thanks for buying',
+            message:`You get ${this.buyCoinCount} ${this.coin.id}`
+          });
         });
       }
     },
     sellCoins() {
-      const amountUserCoin = this.userState.coins.find(coin => coin.id === this.coin.id).amount;
-      if(amountUserCoin && amountUserCoin <= this.sellCoinCount) {
+      const amountUserCoin = this.userState.userCoins.find(coin => coin.coinId === this.coin.id).amount;
+      if(amountUserCoin && amountUserCoin >= this.sellCoinCount) {
         const sellObj = {
           coinId: this.coin.id,
+          coinSymbol: this.coin.symbol,
           amount: this.sellCoinCount,
           token: localStorage.pepele,
           price: this.coin.priceUsd
-        }
+        };
+        console.log('sell obj', sellObj);
+        axios.post('/api/sellcoins', sellObj).then(res => {
+          console.log('res sell', res);
+          this.SET_USER(res.data.user);
+          this.$toast.success({
+            title:'Success',
+            message:`You selled ${this.sellCoinCount} ${this.coin.id}`
+          });
+        });
       }
     }
   },
